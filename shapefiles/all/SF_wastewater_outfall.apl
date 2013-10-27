@@ -1,0 +1,1 @@
+<ArcPad><LAYER name="SF_wastewater_outfall"><SYMBOLOGY><SIMPLELABELRENDERER visible="false" field=""><TEXTSYMBOL font="Arial" charset="" fontsize="8.250000" fontstyle="regular" fontcolor="0,0,0" angle="0.000000"/></SIMPLELABELRENDERER><SIMPLERENDERER label=""><SIMPLELINESYMBOL type="solid" width="0.400000" color="115,76,0"/></SIMPLERENDERER></SYMBOLOGY></LAYER></ArcPad>

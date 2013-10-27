@@ -1,0 +1,1 @@
+<ArcPad><LAYER name="SFP_Historical_Shoreline"><SYMBOLOGY><SIMPLELABELRENDERER visible="false" field=""><TEXTSYMBOL font="Arial" charset="" fontsize="8.250000" fontstyle="regular" fontcolor="0,0,0" angle="0.000000"/></SIMPLELABELRENDERER><SIMPLERENDERER label=""><SIMPLELINESYMBOL type="solid" width="1.500000" color="56,168,0"/></SIMPLERENDERER></SYMBOLOGY></LAYER></ArcPad>
