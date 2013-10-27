@@ -1,0 +1,46 @@
+body {
+	background: url('../img/tile-bg.png');
+}
+
+h1 {
+	font-family: "nimbus-sans",sans-serif;
+}
+.centered {
+	text-align: center;
+}
+
+.btn-aqua {
+  color: #ffffff;
+  background-color: #000;
+  border-color: #669999;
+}
+
+.btn:hover, .btn:focus {
+	color: #669999;
+	text-decoration: none;
+}
+
+.small {
+	font-size: 35px;
+	font-weight: 100;
+}
+
+.big {
+	font-size: 50px;
+	margin-top: -10px;
+	display: block;
+	font-weight: 300;
+}
+.floor {
+	background-color: #000;
+	padding-top: 20px;
+	height: 100px;
+	width: 100%;
+	margin-top: -24px;
+}
+.pipe-vertical {
+	width: 60px;
+	background-color: #ffffff;
+	margin-left: auto;
+	margin-right: auto;
+}
