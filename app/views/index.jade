@@ -1,0 +1,94 @@
+extends layout
+
+block body
+	#wrap
+		.title-container
+			#title.col-md-3.col-md-offset-3
+				h4
+					img(src='/img/toilcon.png') 
+					|  swirl.ly 
+					small  the journey of the urban flush
+
+		.container				
+			div(ng-controller='FlushCtrl')
+				div(ng-switch="flushState").toilet-container
+					div(ng-switch-when="start")
+						//- start flush 
+						.row.no-top-padding
+							.col-md-6.col-md-offset-3.centered
+								div(ng-click='flush()')
+									button.btn.btn-aqua.btn-lg.btn-block(type='button')
+										span.small ready, set...
+										span.big FLUSH!
+						.row
+							.col-md-6.col-md-offset-3.centered
+								img.img-responsive.toilet(src='/img/toilet.png')
+
+					div(ng-switch-when="flushProcessing")
+						.row
+							.col-md-6.col-md-offset-3.text-center.processing
+								h3
+									| Well done!
+									br
+									| Hang tight, while we, uh,
+									br
+									i process 
+									|  your submission.
+									br
+									br
+									img(src='/img/loading.gif')
+									br
+									br
+					div(ng-switch-when="flushResults")
+						.row
+							.col-md-6.col-md-offset-3.text-center
+								h3
+									| YOUR FLUSH STATS
+								p
+									| Your flush is currently travelling
+									strong 1.2 miles
+									| to
+									strong Oceanside Water Treatment Facility
+									| .
+								img(src='/img/map.png')
+								p
+									| Along the way, it will join other people’s flushes, rainwater & street runoff, maybe even some ex-goldfish. It will travel about
+									strong 200 feet
+									| in elevation to get there, and take about
+									strong 40 minutes
+									| from where you are.
+								p
+									| It will take about
+									strong 14 days
+									| to complete it’s journey back out into the bay, where it will be at least
+									strong 96% clean
+									| .
+								p
+									| Thank you for flushing!
+									br
+									a(href='#') TWEET IT
+									| or
+									a(href='#') learn more about SFPUC
+									| .
+
+
+				//- .jumbotron  
+					//- h1 Hello {{name}}
+					//- | Angular seed app: v
+					//- span(app-version)
+				//div(ng-view)
+
+	#footer
+		.container
+			p.text-muted.credit.text-center Swirl.ly is licensed under Creative Commons | 
+				a(href='https://github.com/emilyville/swirl.ly') View it on Github
+
+
+	script(src='js/lib/angular/angular.js')
+	script(src='js/app.js')
+	script(src='js/services.js')
+	script(src='js/controllers.js')
+	script(src='js/filters.js')
+	script(src='js/directives.js')
+	script(src='js/lib/jquery/jquery-2.0.3.min.js')
+	script(src='bootstrap/js/bootstrap.min.js')
