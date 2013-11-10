@@ -20,11 +20,32 @@ function FlushCtrl($scope) {
   };
 }
 
-function MyCtrl1() {}
-MyCtrl1.$inject = [];
+function WatershedCtrl($scope, $http) {
+  function success(position) {
+    $http({method: 'GET', url: '/api/watershed',
+           params: {latitude: position.coords.latitude,
+                    longitude: position.coords.longitude}
+          }).
+    success(function(data, status, headers, config) {
+      $scope.watershed = data.watershed;
+      $scope.flushState = 'flushResults';
+    }).
+    error(function(data, status, headers, config) {
+      $scope.watershed = 'Error!'
+      $scope.flushState = 'start';
+    });
+  };
 
+  function error(msg) {
+    $scope.watershed = 'geolocation error';
+    console.log("geolocation error");
+  };
 
-function MyCtrl2() {
+  console.log("in the watershed controller");
+  if (navigator.geolocation) {
+    console.log("getting location");
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+  console.log("location not supported");
 }
-MyCtrl2.$inject = [];
 

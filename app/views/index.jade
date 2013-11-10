@@ -25,20 +25,21 @@ block body
 								img.img-responsive.toilet(src='/img/toilet.png')
 
 					div(ng-switch-when="flushProcessing")
-						.row
-							.col-md-6.col-md-offset-3.text-center.processing
-								h3
-									| Well done!
-									br
-									| Hang tight, while we, uh,
-									br
-									i process 
-									|  your submission.
-									br
-									br
-									img(src='/img/loading.gif')
-									br
-									br
+						div(ng-controller="WatershedCtrl")
+							.row
+								.col-md-6.col-md-offset-3.text-center.processing
+									h3
+										| Well done!
+										br
+										| Hang tight, while we, uh,
+										br
+										i process 
+										|  your submission.
+										br
+										br
+										img(src='/img/loading.gif')
+										br
+										br
 					div(ng-switch-when="flushResults")
 						.row
 							.col-md-6.col-md-offset-3.text-center
