@@ -20,6 +20,7 @@ exports.watershed = function(req, res){
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var data = {error: "", watershed: ""};
+  console.log("got watershed request");
 
   pg.connect(connString, function(err, client, done) {
     if (err) {
