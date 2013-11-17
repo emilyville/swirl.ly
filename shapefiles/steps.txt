@@ -1,6 +1,14 @@
 createuser -P -d -r -s swirly
 createdb -O swirly watersheds
+
+#postgis 2.x
 psql -d watersheds -c "CREATE EXTENSION postgis;"
+
+#postgis 1.5
+psql -d watersheds -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql
+psql -d watersheds -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql
+psql -d watersheds -f /usr/share/postgresql/9.1/contrib/postgis_comments.sql
+
 # http://spatialreference.org/ref/epsg/2227/
 shp2pgsql -I -s 2227 SFP_watershed.shp | psql -d watersheds
 
@@ -14,8 +22,14 @@ watersheds=# select AddGeometryColumn('sfp_watershed', 'geom_4269', 4269, 'MULTI
  public.sfp_watershed.geom_4269 SRID:4269 TYPE:MULTIPOLYGON DIMS:2 
 (1 row)
 
+
+#postgis 2.x
 watersheds=# update sfp_watershed set geom_4269 = ST_Transform(geom, 4269);
 UPDATE 108
+
+#postgis 1.5
+watersheds=# update sfp_watershed set geom_4269 = ST_Transform(the_geom, 4269);
+
 watersheds=# commit;
 
 

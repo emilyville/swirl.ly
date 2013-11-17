@@ -27,7 +27,9 @@ exports.watershed = function(req, res){
       done();
       data["error"] = err;
     } else {
-      client.query("select name1 from sfp_watershed where ST_Contains(geom_4269, ST_PointFromText('POINT("+ longitude + " " + latitude + ")', 4269))",
+      client.query({text: "select name1 from sfp_watershed where ST_Contains(geom_4269, ST_PointFromText('POINT($1 $2)', 4269))",
+                    values: [longitude, latitude],
+                    name: "watershed from lat long"},
                  function(err, result) {
       if (err) {
         data["error"] = err;
