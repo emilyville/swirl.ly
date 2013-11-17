@@ -1,4 +1,5 @@
-createdb watersheds
+createuser -P -d -r -s swirly
+createdb -O swirly watersheds
 psql -d watersheds -c "CREATE EXTENSION postgis;"
 # http://spatialreference.org/ref/epsg/2227/
 shp2pgsql -I -s 2227 SFP_watershed.shp | psql -d watersheds
