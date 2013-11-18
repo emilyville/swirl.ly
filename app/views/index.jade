@@ -53,9 +53,9 @@ block body
 											span.highlighted {{watershed}}!
 										p
 											| Currently starting out on a 
-											span.highlighted  1.2 mile journey
+											span.highlighted  {{distance}} mile journey
 											| , your flush is heading to the 
-											span.highlighted  Oceanside Water Treatment Facility
+											span.highlighted  {{facility}}
 											| .
 										//- img(src='/img/map.png')
 										//- p
@@ -86,7 +86,7 @@ block body
 														script(src='//platform.twitter.com/widgets.js')
 											.col-md-6.text-center	
 												p	
-													| Learn more: 
+													| Learn more: 	
 													a(href='http://www.sfwater.org/index.aspx?page=433') 
 														button.btn.btn-aqua(type='button')
 															| SF Water Power Sewer
