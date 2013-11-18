@@ -18,7 +18,9 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
   $scope.flushState = 'start';
   $scope.flush = function() {
     $scope.flushState = 'flushProcessing';
-    $scope.coords = geolocation.getLocation().then(function(data){
+    geolocation.getLocation().then(function(data){
+      $scope.latitude = data.coords.latitude;
+      $scope.longitude = data.coords.longitude;
       console.log(data);
       $http({method: 'GET', url: '/api/watershed',
              params: {latitude: data.coords.latitude,
