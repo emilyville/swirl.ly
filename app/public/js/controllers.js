@@ -30,7 +30,7 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
         } else {
           $scope.watershed = data.watershed;
           $scope.facility = data.facility.name;
-          $scope.distance = data.facility.distance;
+          $scope.distance = data.facility.distance.toFixed(1);
           $scope.facility_lat = data.facility.latitude;
           $scope.facility_lon = data.facility.longitude;
           console.log("got watershed " + data.watershed);
