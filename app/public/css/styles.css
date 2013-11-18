@@ -1,7 +1,42 @@
 body {
 	border-top: 5px #66FFFF solid;
-	background: url('../img/tile-bg.png');
+	background-color: #333;
 }
+.container {
+	margin-top: 45px;
+}
+.tile {
+	background: url('../img/tile-bg.png') #fff;
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+
+}
+h1, p {
+	font-family: "nimbus-sans",sans-serif;
+	color: #333;
+}
+a {
+	color: #66FFFF;
+}
+a:hover {
+	color: #006666;
+}
+
+p {
+	font-size: 18px;
+}
+
+.centered {
+	text-align: center;
+}
+.highlighted {
+	font-weight: bold;
+	color: #006666;
+	background-color: #66FFFF;
+	padding: 4px;
+}
+
 .title-container {
 	display: block;
 	min-height: 20px;
@@ -27,17 +62,16 @@ body {
 	margin: -80px, 50px;
 }
 
-h1 {
-	font-family: "nimbus-sans",sans-serif;
-}
-.centered {
-	text-align: center;
+.processing, .stats {
+	background-color: #ffffff;
+	margin-bottom: 60px;
 }
 
 .btn-aqua {
   color: #ffffff;
   background-color: #333;
   border-color: #669999;
+  margin-bottom: 20px;
 }
 
 .btn:hover, .btn:focus {
@@ -58,23 +92,22 @@ h1 {
 	font-weight: 300;
 }
 
-.pipe-vertical {
-	width: 15px;
-	height: 100%;
-	background-color: #fff;
-	margin-left: auto;
-	margin-right: auto;
-}
 .toilet {
-	margin-top: 20px;
-	display: inline-block;
 	max-width: 200px;
 }
-.processing, .stats {
-	background-color: #ffffff;
+.tp {
+	margin-top: 10px;
+	vertical-align: top;
+	margin-left: -85px;
+}
+.floor {
+	background-color: #333;
+	position: fixed;
+	width: 100%;
+	min-height: 130px;
 }
 
 #footer {
 	background-color: #333;
-	height: 160px;
+	height: 130px;
 }

@@ -15,7 +15,6 @@ function AppCtrl($scope, $http) {
 
 angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation',
   function($scope, $http, geolocation) {
-
   $scope.flushState = 'start';
   $scope.flush = function() {
     $scope.flushState = 'flushProcessing';
@@ -26,10 +25,15 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
                       longitude: data.coords.longitude}
             }).
       success(function(data, status, headers, config) {
-        $scope.watershed = data.watershed;
-        console.log("got watershed " + data.watershed);
-        $scope.showResults();
-        console.log("state is " + $scope.flushState);
+        if (data.error) {
+          $scope.showError();
+        } else {
+          $scope.watershed = data.watershed;
+          console.log("got watershed " + data.watershed);
+          // $scope.tweetButton = 'htmlstring' + data.watershed + 'please';
+          $scope.showResults();
+          console.log("state is " + $scope.flushState);          
+        }
       }).
       error(function(data, status, headers, config) {
         console.log("failed to get watershed");
@@ -41,5 +45,11 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
   $scope.showResults = function() {
         $scope.flushState = 'flushResults';
   };
+  $scope.showError = function() {
+        $scope.flushState = 'flushFail';
+  };
+  $scope.restart = function() {
+      $scope.flushState = 'start';
+  }  
 }]);
 

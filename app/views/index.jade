@@ -2,83 +2,110 @@ extends layout
 
 block body
 	#wrap
-		.title-container
+		.tile
+			.title-container
 			#title.col-md-3.col-md-offset-3
 				h4
 					img(src='/img/toilcon.png') 
 					|  swirl.ly 
 					small  the journey of the urban flush
+			.container				
+				div(ng-controller='FlushCtrl')
+					div(ng-switch="flushState").toilet-container
+						div(ng-switch-when="start")
+							//- start flush 
+							.row
+								.col-md-6.col-md-offset-3.centered
+									div(ng-click='flush()')
+										button.btn.btn-aqua.btn-lg.btn-block(type='button')
+											span.small ready, set...
+											span.big FLUSH!
+							.row
+								.col-md-6.col-md-offset-3.centered
+									.toilet-img-container 
+										img.tp(src='/img/tp.png')
+										img.toilet(src='/img/toilet.png')
 
-		.container				
-			div(ng-controller='FlushCtrl')
-				div(ng-switch="flushState").toilet-container
-					div(ng-switch-when="start")
-						//- start flush 
-						.row.no-top-padding
-							.col-md-6.col-md-offset-3.centered
-								div(ng-click='flush()')
-									button.btn.btn-aqua.btn-lg.btn-block(type='button')
-										span.small ready, set...
-										span.big FLUSH!
-						.row
-							.col-md-6.col-md-offset-3.centered
-								img.img-responsive.toilet(src='/img/toilet.png')
+						div(ng-switch-when="flushProcessing")
+							.row
+								.col-md-6.col-md-offset-3.text-center
+									.processing
+										h3
+											| Well done!
+											br
+											| Hang tight, while we, uh,
+											br
+											i process 
+											|  your submission.
+											br
+											br
+											img(src='/img/loading.gif')
+											br
+											br
+						div(ng-switch-when="flushResults")
+							.row
+								.col-md-6.col-md-offset-3.text-center
+									.stats
+										h3
+											| Nice work!
+										p
+											| You just flushed in the 
+											span.highlighted {{watershed}}!
+										p
+											| Currently starting out on a 
+											span.highlighted  1.2 mile journey
+											| , your flush is heading to the 
+											span.highlighted  Oceanside Water Treatment Facility
+											| .
+										//- img(src='/img/map.png')
+										//- p
+										//- 	| Along the way, it will join other people’s flushes, rainwater & street runoff, maybe even some ex-goldfish. It will travel about
+										//- 	strong 200 feet
+										//- 	| in elevation to get there, and take about
+										//- 	strong 40 minutes
+										//- 	| from where you are.
+										//- p
+										//- 	| It will take about
+										//- 	strong 14 days
+										//- 	| to complete it’s journey back out into the bay, where it will be at least
+										//- 	strong 96% clean
+										//- 	| .
+										hr
+										p
+											| Thank you for flushing!
+										.row
+											.col-md-6.text-center						
+												p
+													| Tell your friends: 
+													a.twitter-share-button(
+														href='https://twitter.com/share', 
+														data-size='large', 
+														data-text='I just mapped my flush with swirl.ly!'
+														data-lang='en') 
+														| Tweet
+														script(src='//platform.twitter.com/widgets.js')
+											.col-md-6.text-center	
+												p	
+													| Learn more: 
+													a(href='http://www.sfwater.org/index.aspx?page=433') 
+														button.btn.btn-aqua(type='button')
+															| SF Water Power Sewer
 
-					div(ng-switch-when="flushProcessing")
-						.row
-							.col-md-6.col-md-offset-3.text-center.processing
-								h3
-									| Well done!
-									br
-									| Hang tight, while we, uh,
-									br
-									i process 
-									|  your submission.
-									br
-									br
-									img(src='/img/loading.gif')
-									br
-									br
-					div(ng-switch-when="flushResults")
-						.row
-							.col-md-6.col-md-offset-3.text-center
-								h3
-									| YOUR FLUSH STATS
-								p
-									| You are currently located in the {{watershed}}
-									| Your flush is currently travelling
-									strong 1.2 miles
-									| to
-									strong Oceanside Water Treatment Facility
-									| .
-								img(src='/img/map.png')
-								p
-									| Along the way, it will join other people’s flushes, rainwater & street runoff, maybe even some ex-goldfish. It will travel about
-									strong 200 feet
-									| in elevation to get there, and take about
-									strong 40 minutes
-									| from where you are.
-								p
-									| It will take about
-									strong 14 days
-									| to complete it’s journey back out into the bay, where it will be at least
-									strong 96% clean
-									| .
-								p
-									| Thank you for flushing!
-									br
-									a(href='#') TWEET IT
-									| or
-									a(href='#') learn more about SFPUC
-									| .
-
-
-				//- .jumbotron  
-					//- h1 Hello {{name}}
-					//- | Angular seed app: v
-					//- span(app-version)
-				//div(ng-view)
-
+						div(ng-switch-when="flushFail")
+							.row
+								.col-md-6.col-md-offset-3.text-center
+									h3
+										| Oh Noes!
+									p
+										| We can't seem to get your location, 
+										br
+										| or maybe you're not in San Francisco? 
+										br
+										| Sorry about that. 
+									p 
+										a(ng-click="restart()") 
+											button.btn.btn-aqua(type='button')
+												| Try again
 	#footer
 		.container
 			p.text-muted.credit.text-center Swirl.ly is licensed under Creative Commons | 
