@@ -29,6 +29,10 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
           $scope.showError();
         } else {
           $scope.watershed = data.watershed;
+          $scope.facility = data.facility.name;
+          $scope.distance = data.facility.distance;
+          $scope.facility_lat = data.facility.latitude;
+          $scope.facility_lon = data.facility.longitude;
           console.log("got watershed " + data.watershed);
           // $scope.tweetButton = 'htmlstring' + data.watershed + 'please';
           $scope.showResults();
