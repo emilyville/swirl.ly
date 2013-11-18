@@ -10,6 +10,10 @@ exports.name = function (req, res) {
 
 var pg = require('pg');
 
+function isNumber(n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+}
+
 /*
  * GET watershed by location.
  */
@@ -20,6 +24,11 @@ exports.watershed = function(req, res){
   var latitude = req.query.latitude;
   var longitude = req.query.longitude;
   var data = {error: "", watershed: ""};
+  if (!isNumber(latitude) || !isNumber(longitude)) {
+    data["error"] = "Invalid request parameters";
+    res.send(data);
+    return;
+  }  
   console.log("got watershed request");
 
   pg.connect(connString, function(err, client, done) {
@@ -27,14 +36,19 @@ exports.watershed = function(req, res){
       done();
       data["error"] = err;
     } else {
-      client.query({text: "select name1 from sfp_watershed where ST_Contains(geom_4269, ST_PointFromText('POINT($1 $2)', 4269))",
-                    values: [longitude, latitude],
-                    name: "watershed from lat long"},
+      console.log(longitude + " " + latitude);
+      client.query("select sfp_watershed.name1, sfp_watershed.facility, ST_X(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)), ST_Y(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)) from sfp_watershed left join sf_wastewater_plant on sfp_watershed.facility = sf_wastewater_plant.name1 where ST_Contains(sfp_watershed.geom, ST_TRANSFORM(ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269), 2227))",
                  function(err, result) {
       if (err) {
         data["error"] = err;
       } else {
-        data["watershed"] = result.rows[0].name1; 
+        if (result.rows.length > 0) {
+	  console.log(result.rows[0]);
+          data["watershed"] = result.rows[0].name1; 
+          data["facility"] = {longitude: result.rows[0].st_x, latitude: result.rows[0].st_y, name: result.rows[0].facility};
+        } else {
+          data["error"] = "No results";
+        }
       }
       done();
       res.send(data);
