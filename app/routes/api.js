@@ -37,7 +37,16 @@ exports.watershed = function(req, res){
       data["error"] = err;
     } else {
       console.log(longitude + " " + latitude);
-      client.query("select sfp_watershed.name1, sfp_watershed.facility, ST_X(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)), ST_Y(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)) from sfp_watershed left join sf_wastewater_plant on sfp_watershed.facility = sf_wastewater_plant.name1 where ST_Contains(sfp_watershed.geom, ST_TRANSFORM(ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269), 2227))",
+      client.query([
+"select ",
+"sfp_watershed.name1, sfp_watershed.facility, ",
+"ST_X(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)), ",
+"ST_Y(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)), ",
+"ST_DISTANCE(ST_CENTROID(sf_wastewater_plant.geom), ST_TRANSFORM(ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269), 2227)) ",
+"from sfp_watershed left join sf_wastewater_plant ",
+"on sfp_watershed.facility = sf_wastewater_plant.name1 ",
+"where ST_Contains(sfp_watershed.geom, ST_TRANSFORM(ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269), 2227))"
+].join(""),
                  function(err, result) {
       if (err) {
         data["error"] = err;
@@ -45,7 +54,10 @@ exports.watershed = function(req, res){
         if (result.rows.length > 0) {
 	  console.log(result.rows[0]);
           data["watershed"] = result.rows[0].name1; 
-          data["facility"] = {longitude: result.rows[0].st_x, latitude: result.rows[0].st_y, name: result.rows[0].facility};
+          data["facility"] = {longitude: result.rows[0].st_x,
+                              latitude: result.rows[0].st_y,
+                              name: result.rows[0].facility,
+                              distance: result.rows[0].st_distance/5280.0};
         } else {
           data["error"] = "No results";
         }
