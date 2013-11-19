@@ -57,7 +57,11 @@ block body
 											| , your flush is heading to the 
 											span.highlighted  {{facility}}
 											| .
-										img(src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=terrain&markers=color:red%7C{{facility_lat}},{{facility_lon}}%7C{{latitude}},{{longitude}}&sensor=true')
+										//- img(src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=terrain&markers=color:red%7C{{facility_lat}},{{facility_lon}}%7C{{latitude}},{{longitude}}&sensor=true')
+										
+										img(src="http://api.tiles.mapbox.com/v3/emilyville.gb0chmmk/pin-l-industrial+333({{facility_lon}},{{facility_lat}}),pin-m-water+333({{longitude}},{{latitude}})/{{longitude}},{{latitude}},12/450x450.png")
+
+
 										//- img(src='/img/map.png')
 										//- p
 										//- 	| Along the way, it will join other people’s flushes, rainwater & street runoff, maybe even some ex-goldfish. It will travel about
