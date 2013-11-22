@@ -16,16 +16,16 @@ function validateRequest(req) {
   var longitude = req.query.longitude;
 
   if (!isNumber(latitude) || !isNumber(longitude)) {
-    throw new Error("Invalid request parameters");
+    return Q.reject(new Error("Invalid request parameters"));
   }
-  return {latitude: latitude, longitude: longitude};
+  return Q.resolve({latitude: latitude, longitude: longitude});
 }
 
 function deferredConnect() {
   var deferred = Q.defer();
   pg.connect(connString, function(err, client, done) {
     if (err) {
-      deferred.reject(new Error("An error has occurred."));
+      deferred.reject(new Error("A connection error has occurred."));
     }
     deferred.resolve([client, done]);
   });
@@ -36,7 +36,7 @@ function deferredQuery(client, queryString) {
   var deferred = Q.defer();
   client.query(queryString, function(err, result) {
     if (err) {
-      deferred.reject(new Error("An error has occurred."));
+      deferred.reject(new Error("A query error has occurred."));
     }
     deferred.resolve(result);
   });
@@ -54,19 +54,29 @@ function getElevation(lat, lng){
     path: "/maps/api/elevation/json?locations=" + lat + "," + lng + "&sensor=true"
   };
   //GET request that handles the parsing of data too
-  http.get( options, function( res ){
+  http.get(options, function(res){
     var data = "";
 
-    function onData( chunk ){
-      data += chunk;  
+    function onData(chunk){
+      data += chunk;
     }
-    res.on( "data", onData );
+    res.on("data", onData);
+    res.on("error", function(error) {
+      deferred.reject(new Error(error));
+    });
 
-    function onEnd( chunk ){
-      var el_response = JSON.parse( data );
-      deferred.resolve(el_response.results[0]);
+    function onEnd(chunk){
+      console.log("onend");
+      try {
+        var el_response = JSON.parse(data);
+        deferred.resolve(el_response.results[0]);
+      } catch (exception) {
+        console.log("caught exception");
+        deferred.reject(new Error("Bad json response"));
+        console.log("rejected promise");
+      }
     }
-    res.on( "end", onEnd );
+    res.on("end", onEnd);
   });
   return deferred.promise;
 }
@@ -99,15 +109,22 @@ exports.watershed = function(req, res){
                 latitude: result.rows[0].st_y,
                 name: result.rows[0].facility,
                 distance: result.rows[0].st_distance/5280.0};
-            return Q.resolve(data);
+            return getElevation(latitude, longitude).then(function(elevation_resp) {
+              data.elevation = elevation_resp.elevation;
+              return Q.resolve(data);
+            }, function(error) {
+              return Q.resolve(data);
+            });
           } else {
             throw new Error("No results for location.");
           }
         }).then(function(response) {
           res.send(response);
+        }, function(error) {
+          res.send({error: error.message});
         });
     });
-  }, function(error) {
+  }).fail(function(error) {
     res.send({error: error.message});
   });
 };
