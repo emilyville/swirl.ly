@@ -116,12 +116,10 @@ exports.watershed = function(req, res){
               return Q.resolve(data);
             });
           } else {
-            throw new Error("No results for location.");
+            return Q.reject(new Error("No results for location."));
           }
         }).then(function(response) {
           res.send(response);
-        }, function(error) {
-          res.send({error: error.message});
         });
     });
   }).fail(function(error) {
