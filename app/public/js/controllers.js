@@ -35,6 +35,7 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
           $scope.distance = data.facility.distance.toFixed(1);
           $scope.facility_lat = data.facility.latitude;
           $scope.facility_lon = data.facility.longitude;
+          $scope.elevation = data.elevation.toFixed(0);
           console.log("got watershed " + data.watershed);
           // $scope.tweetButton = 'htmlstring' + data.watershed + 'please';
           $scope.showResults();
