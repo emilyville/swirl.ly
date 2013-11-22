@@ -110,7 +110,7 @@ exports.watershed = function(req, res){
                 name: result.rows[0].facility,
                 distance: result.rows[0].st_distance/5280.0};
             return getElevation(latitude, longitude).then(function(elevation_resp) {
-              data.elevation = elevation_resp.elevation;
+              data.elevation = elevation_resp.elevation/0.03048;
               return Q.resolve(data);
             }, function(error) {
               return Q.resolve(data);
