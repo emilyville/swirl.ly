@@ -47,17 +47,21 @@ block body
 								.col-md-6.col-md-offset-3.text-center
 									.stats
 										h3
-											| Nice work!
+											| Nicely done!
 										p
 											| You just flushed in the 
-											span.highlighted {{watershed}}!
+											span.highlighted {{watershed}}.
 										p
 											| Currently starting out on a 
 											span.highlighted  {{distance}} mile journey
 											| , your flush is heading to the 
 											span.highlighted  {{facility}}
 											| .
-										img(src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=terrain&markers=color:red%7C{{facility_lat}},{{facility_lon}}%7C{{latitude}},{{longitude}}&sensor=true')
+										//- img(src='http://maps.googleapis.com/maps/api/staticmap?size=400x400&maptype=terrain&markers=color:red%7C{{facility_lat}},{{facility_lon}}%7C{{latitude}},{{longitude}}&sensor=true')
+										
+										img(src="http://api.tiles.mapbox.com/v3/emilyville.gb0chmmk/pin-l-industrial+333({{facility_lon}},{{facility_lat}}),pin-m-water+333({{longitude}},{{latitude}})/{{longitude}},{{latitude}},12/450x450.png")
+
+
 										//- img(src='/img/map.png')
 										//- p
 										//- 	| Along the way, it will join other people’s flushes, rainwater & street runoff, maybe even some ex-goldfish. It will travel about
@@ -72,8 +76,6 @@ block body
 										//- 	strong 96% clean
 										//- 	| .
 										hr
-										p
-											| Thank you for flushing!
 										.row
 											.col-md-6.text-center						
 												p
@@ -81,7 +83,7 @@ block body
 													a.twitter-share-button(
 														href='https://twitter.com/share', 
 														data-size='large', 
-														data-text='I just mapped my flush with swirl.ly!'
+														data-text='I just mapped my flush with http://swirl.ly!'
 														data-lang='en') 
 														| Tweet
 														script(src='//platform.twitter.com/widgets.js')
