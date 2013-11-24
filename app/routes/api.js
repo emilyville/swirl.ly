@@ -66,14 +66,11 @@ function getElevation(lat, lng){
     });
 
     function onEnd(chunk){
-      console.log("onend");
       try {
         var el_response = JSON.parse(data);
         deferred.resolve(el_response.results[0]);
       } catch (exception) {
-        console.log("caught exception");
         deferred.reject(new Error("Bad json response"));
-        console.log("rejected promise");
       }
     }
     res.on("end", onEnd);
