@@ -53,14 +53,13 @@ p {
 	background: #ffffff;
 	border-top: 5px #ffffff solid;
 	border-bottom: 5px #66FFFF solid;
-	border-right: 5px #66FFFF solid;
-	border-left: 5px #66FFFF solid;
-	text-align: center;
-	margin-left: 10%;
-	margin-right: 10%;
-	min-width: 320px;
+	text-align: left;
+	width: 100%;
 }
 
+#title h4 {
+	min-width: 270px;
+}
 .processing {
 	margin: -80px, 50px;
 }
@@ -96,7 +95,7 @@ p {
 }
 
 .toilet {
-	max-width: 200px;
+	max-width: 160px;
 }
 .tp {
 	margin-top: 10px;
@@ -113,4 +112,8 @@ p {
 #footer {
 	background-color: #333;
 	height: 130px;
+}
+
+#footer p {
+	font-size: 14px;
 }

@@ -6,11 +6,12 @@ block body
 	#wrap
 		.tile
 			.title-container
-			#title.col-md-3.col-md-offset-3
-				h4
-					img(src='/img/toilcon.png') 
-					|  swirl.ly 
-					small  the journey of the urban flush
+			#title
+				.col-md-3.col-md-offset-3
+					h4
+						img(src='/img/toilcon.png') 
+						|  swirl.ly 
+						small  the journey of the urban flush
 			.container				
 				div(ng-controller='FlushCtrl')
 					div(ng-switch="flushState").toilet-container
