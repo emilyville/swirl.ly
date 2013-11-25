@@ -106,12 +106,12 @@ p {
 	background-color: #333;
 	position: fixed;
 	width: 100%;
-	min-height: 130px;
+	min-height: 10px;
 }
 
 #footer {
 	background-color: #333;
-	height: 130px;
+	height: 10px;
 }
 
 #footer p {

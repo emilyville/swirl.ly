@@ -34,8 +34,6 @@ block body
 								.col-md-6.col-md-offset-3.text-center
 									.processing
 										h3
-											| Well done!
-											br
 											| Hang tight, while we, uh,
 											br
 											i process 
@@ -52,16 +50,20 @@ block body
 										h3
 											| Nicely done!
 										p
-											| You just flushed in the 
+											| You flushed in the 
+											br
 											span.highlighted {{watershed}}.
 										p
-											| Currently starting out on a 
+											| Starting out on a 
+											br
 											span.highlighted  {{distance}} mile journey
 											| , your flush is heading to the 
+											br
 											span.highlighted  {{facility}}
 											| .
 										p
-											| Along the way, it will join other people’s flushes, rainwater & street runoff, maybe even some ex-goldfish. Travelling 
+											| It will join other people’s flushes, rainwater, street runoff, and a couple ex-goldfish, travelling 
+											br
 											span.highlighted {{elevation}} feet
 											|  in elevation to get there.
 										img.img-responsive(src="http://api.tiles.mapbox.com/v3/emilyville.gb0chmmk/pin-l-industrial+333({{facility_lon}},{{facility_lat}}),pin-m-water+333({{longitude}},{{latitude}})/{{longitude}},{{latitude}},12/450x450.png")
