@@ -62,7 +62,7 @@ block body
 											span.highlighted  {{facility}}
 											| .
 										p
-											| It will join other people’s flushes, rainwater, street runoff, and a couple ex-goldfish, travelling 
+											| It will join other people’s flushes and a couple ex-goldfish, travelling 
 											br
 											span.highlighted {{elevation}} feet
 											|  in elevation to get there.
@@ -92,8 +92,11 @@ block body
 													| Learn more: 	
 													a(href='http://www.sfwater.org/index.aspx?page=433') 
 														button.btn.btn-aqua(type='button')
-															| SF Water Power Sewer
-
+															| SF Water Power Sewer	
+													| or
+													a(href='http://www.austinwater.gov')
+														button.btn.btn-aqua(type='button')
+															| Austin Water
 						div(ng-switch-when="flushFail")
 							.row
 								.col-md-6.col-md-offset-3.text-center
@@ -102,7 +105,7 @@ block body
 									p
 										| We can't seem to get your location, 
 										br
-										| or maybe you're not in San Francisco? 
+										| or maybe you're not in San Francisco or Austin? 
 										br
 										| Sorry about that. 
 									p 
