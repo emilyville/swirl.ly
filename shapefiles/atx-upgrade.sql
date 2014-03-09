@@ -1,4 +1,3 @@
-select AddGeometryColumn('watershed', 'geom_4269', 4269, 'MULTIPOLYGON', 2);
 -- covert water treatment polygons to points
 create table wastewater_plants as sf_wastewater_plant;
 grant select on wastewater_plants to swirly;
@@ -10,6 +9,10 @@ insert into wastewater_plants (name1, point_4269) values ('South Austin Regional
 
 -- add existing columns as points
 update wastewater_plants set point_4269 = ST_CENTROID(wastewater_plants.geom_4269) where point_4269 IS NULL;
+
+
+--create new watershed table
+select AddGeometryColumn('watershed', 'geom_4269', 4269, 'MULTIPOLYGON', 2);
 
 --rename name column
 alter table watershed rename display_na to name1;
