@@ -35,11 +35,13 @@ angular.module('myApp').controller('FlushCtrl', ['$scope', '$http', 'geolocation
           $scope.distance = data.facility.distance.toFixed(1);
           $scope.facility_lat = data.facility.latitude;
           $scope.facility_lon = data.facility.longitude;
+          $scope.map_key = data.map_key;
+          $scope.map_zoom = data.map_zoom;
           $scope.elevation = data.elevation.toFixed(0);
           console.log("got watershed " + data.watershed);
           // $scope.tweetButton = 'htmlstring' + data.watershed + 'please';
           $scope.showResults();
-          console.log("state is " + $scope.flushState);          
+          console.log("state is " + $scope.flushState);
         }
       }).
       error(function(data, status, headers, config) {

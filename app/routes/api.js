@@ -89,23 +89,25 @@ exports.watershed = function(req, res){
     return deferredConnect().spread(function(client, done) {
       return deferredQuery(client, [
           "select ",
-          "sfp_watershed.name1, sfp_watershed.facility, ",
-          "ST_X(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)), ",
-          "ST_Y(ST_TRANSFORM(ST_CENTROID(sf_wastewater_plant.geom), 4269)), ",
-          "ST_DISTANCE(ST_CENTROID(sf_wastewater_plant.geom), ST_TRANSFORM(ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269), 2227)) ",
-          "from sfp_watershed left join sf_wastewater_plant ",
-          "on sfp_watershed.facility = sf_wastewater_plant.name1 ",
-          "where ST_Contains(sfp_watershed.geom, ST_TRANSFORM(ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269), 2227))"
+          "watershed.name1, watershed.facility, wastewater_plants.map_key, wastewater_plants.map_zoom, ",
+          "ST_X(wastewater_plants.point_4269), ",
+          "ST_Y(wastewater_plants.point_4269), ",
+          "ST_DISTANCE_SPHERE(wastewater_plants.point_4269, ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269)) ",
+          "from watershed left join wastewater_plants ",
+          "on watershed.facility = wastewater_plants.name1 ",
+          "where ST_Contains(watershed.geom_4269, ST_PointFromText('POINT(" + longitude + " " + latitude + ")', 4269))"
         ].join("")).then(function(result) {
           done();
           if (result.rows.length > 0) {
             data = {};
             data.watershed = result.rows[0].name1;
+            data.map_key = result.rows[0].map_key;
+            data.map_zoom = result.rows[0].map_zoom;
             data.facility = {
                 longitude: result.rows[0].st_x,
                 latitude: result.rows[0].st_y,
                 name: result.rows[0].facility,
-                distance: result.rows[0].st_distance/5280.0};
+                distance: result.rows[0].st_distance_sphere/1609.344};
             return getElevation(latitude, longitude).then(function(elevation_resp) {
               data.elevation = elevation_resp.elevation/0.3048;
               return Q.resolve(data);
