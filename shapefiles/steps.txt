@@ -62,3 +62,11 @@ select name1, ST_AsText(ST_Centroid(geom_4269)) from sfp_watershed where ST_Cont
 alter table wastewater_plants add column map_key varchar(50);
 update wastewater_plants set map_key = 'emilyville.gb0chmmk' where name1 IN ('Southeast Treatment Plant', 'North Point Wet Weather Treatment Facility', 'Oceanside Treatment Plant');
 update wastewater_plants set map_key = 'emilyville.hf313o03' where map_key IS NULL;
+
+watersheds=# alter table wastewater_plants add column map_zoom integer;
+ALTER TABLE
+watersheds=# update wastewater_plants set map_zoom = 12 where map_key = 'emilyville.gb0chmmk';
+UPDATE 3
+watersheds=# update wastewater_plants set map_zoom = 11 where map_key = 'emilyville.hf313o03';
+UPDATE 2
+
