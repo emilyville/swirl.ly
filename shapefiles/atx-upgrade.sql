@@ -10,16 +10,6 @@ insert into wastewater_plants (name1, point_4269) values ('South Austin Regional
 -- add existing columns as points
 update wastewater_plants set point_4269 = ST_CENTROID(wastewater_plants.geom_4269) where point_4269 IS NULL;
 
-
---create new watershed table
-select AddGeometryColumn('watershed', 'geom_4269', 4269, 'MULTIPOLYGON', 2);
-
---rename name column
-alter table watershed rename display_na to name1;
-
---copy data from sfp_watershed table
-insert into watershed (name1, geom_4269) select name1, geom_4269 from sfp_watershed;
-
 --add map key column
 alter table wastewater_plants add column map_key varchar(50);
 update wastewater_plants set map_key = 'emilyville.gb0chmmk' where name1 IN ('Southeast Treatment Plant', 'North Point Wet Weather Treatment Facility', 'Oceanside Treatment Plant');
@@ -28,3 +18,15 @@ update wastewater_plants set map_key = 'emilyville.hf313o03' where map_key IS NU
 alter table wastewater_plants add column map_zoom integer;
 update wastewater_plants set map_zoom = 12 where map_key = 'emilyville.gb0chmmk';
 update wastewater_plants set map_zoom = 11 where map_key = 'emilyville.hf313o03';
+
+
+--create new watershed table
+select AddGeometryColumn('watershed', 'geom_4269', 4269, 'MULTIPOLYGON', 2);
+
+--rename name column
+alter table watershed rename display_na to name1;
+
+update watershed set geom_4269 = ST_TRANSFORM(watershed.the_geom, 4269) where geom_4269 IS NULL;
+
+--copy data from sfp_watershed table
+insert into watershed (name1, facility, geom_4269) select name1, facility, geom_4269 from sfp_watershed;

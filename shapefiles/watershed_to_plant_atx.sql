@@ -5,7 +5,7 @@ ALTER TABLE watershed ADD COLUMN facility varchar(50);
 
 -- North Austin – Walnut Creek Wastewater Treatment Plant --> Walnut Creek
 	-- Huck's Slough has an ' in the db but not below
-update watershed set facility = 'Walnut Creek Wastewater Treatment Plant' where name1 = 'Hucks Slough'; 
+update watershed set facility = 'Walnut Creek Wastewater Treatment Plant' where name1 = 'Huck''s Slough'; 
 update watershed set facility = 'Walnut Creek Wastewater Treatment Plant' where name1 = 'Taylor Slough N'; 
 update watershed set facility = 'Walnut Creek Wastewater Treatment Plant' where name1 = 'Lady Bird Lake'; 
 update watershed set facility = 'Walnut Creek Wastewater Treatment Plant' where name1 = 'Colorado River'; 
@@ -42,7 +42,7 @@ update watershed set facility = 'Walnut Creek Wastewater Treatment Plant' where 
 
 -- South Austin – South Austin Regional Wastewater Treatment Plant --> Onion Creek
 	-- Harper's Branch has an ' in the db but not below'
-update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Harpers Branch'; 
+update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Harper''s Branch'; 
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Cuernavaca'; 
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'St. Stephens'; 
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Lake Austin'; 
@@ -50,7 +50,7 @@ update watershed set facility = 'South Austin Regional Wastewater Treatment Plan
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Commons Ford';
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Honey';
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Connors';
-update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Dry N';
+update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Dry  N';
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Elm Creek South';
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Plum';
 update watershed set facility = 'South Austin Regional Wastewater Treatment Plant' where name1 = 'Cedar';
