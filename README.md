@@ -5,9 +5,23 @@ the journey of the urban flush
 
 ---------------------
 
-in the wild at swirl.ly
+In the wild at swirl.ly, and with data to support San Francisco and Austin. 
 
-stay tuned for more stuff.
+How do I add and find data for my city?
+---------------------
+coming soon, for now just email me emily@emilyville.com
+
+Instructions on how to install and deploy
+---------------------
+coming soon, I promise.
+
+
+It looks like this: 
+
+![My image](images/swirlly-landing.png)
+![My image](images/swirlly-results.png)
+
+
 
 ---------------------
 Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
