@@ -5,7 +5,7 @@ the journey of the urban flush
 
 ---------------------
 
-In the wild at swirl.ly, and with data to support San Francisco and Austin. 
+In the wild at swirl.ly, and with data to support San Francisco and Austin. There's a blog post about it here: https://medium.com/p/dff5f372d77c
 
 How do I add and find data for my city?
 ---------------------
